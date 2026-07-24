@@ -1,0 +1,45 @@
+[
+  {
+    "startedAt": "2026-07-24T07:18:00.000Z",
+    "durationMinutes": 60,
+    "category": "learn",
+    "title": "Learned typescript basics",
+    "detail": "",
+    "evidenceUrl": "",
+    "id": "601e91dd-f5c4-46f9-9eb3-d502fd77ab5b",
+    "createdAt": "2026-07-24T07:18:43.122Z"
+  },
+  {
+    "id": "welcome-2",
+    "startedAt": "2026-07-24T11:15:00.000Z",
+    "durationMinutes": 135,
+    "category": "learn",
+    "title": "Full-stack, from first principles",
+    "detail": "Going deeper than tutorials: understanding how the browser, server, database, and deployment fit together.",
+    "evidenceUrl": "",
+    "isSample": true,
+    "createdAt": "2026-07-24T13:30:00.000Z"
+  },
+  {
+    "id": "welcome-1",
+    "startedAt": "2026-07-24T09:00:00.000Z",
+    "durationMinutes": 90,
+    "category": "build",
+    "title": "Opened the public log",
+    "detail": "A starting point for recording the work as it really happens — including the unfinished days.",
+    "evidenceUrl": "",
+    "isSample": true,
+    "createdAt": "2026-07-24T10:30:00.000Z"
+  },
+  {
+    "id": "welcome-3",
+    "startedAt": "2026-07-23T15:00:00.000Z",
+    "durationMinutes": 45,
+    "category": "outreach",
+    "title": "A conversation that changed the question",
+    "detail": "The useful question was not “how do I grow?” but “who already has the trust?”",
+    "evidenceUrl": "",
+    "isSample": true,
+    "createdAt": "2026-07-23T15:45:00.000Z"
+  }
+]

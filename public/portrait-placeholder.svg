@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+  <defs>
+    <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="4"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .16 0"/></filter>
+    <radialGradient id="glow" cx="50%" cy="42%" r="55%"><stop offset="0" stop-color="#b8ff4b" stop-opacity=".28"/><stop offset="1" stop-color="#080a09" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="900" height="1200" fill="#0b0e0c"/>
+  <rect width="900" height="1200" fill="url(#glow)"/>
+  <circle cx="450" cy="390" r="168" fill="#252b25"/>
+  <path d="M180 1080c14-282 107-444 270-444s256 162 270 444" fill="#202620"/>
+  <path d="M330 548c38 43 202 43 240 0l-17 130c-58 54-148 54-206 0z" fill="#1a201b"/>
+  <g fill="none" stroke="#b8ff4b" stroke-opacity=".32">
+    <rect x="42" y="42" width="816" height="1116"/>
+    <path d="M42 164h816M42 1036h816M164 42v1116M736 42v1116"/>
+    <circle cx="450" cy="390" r="214"/>
+  </g>
+  <rect width="900" height="1200" filter="url(#noise)" opacity=".45"/>
+  <g fill="#dce2d8" font-family="monospace" font-size="17">
+    <text x="68" y="105">PORTRAIT / PLACEHOLDER</text><text x="68" y="1115">REPLACE WHEN THE FRAME IS RIGHT</text><text x="720" y="1115">000</text>
+  </g>
+</svg>
