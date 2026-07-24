@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./becoming.css";
+import "./ledger.css";
 
 export const metadata: Metadata = {
   title: "Muhammad Saim — Product Instinct in Motion",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getEntries } from "@/lib/entries";
-import { dayKey, formatMinutes, totalMinutes } from "@/lib/format";
+import { dayKey, formatMinutes, RECORD_START, totalMinutes } from "@/lib/format";
 import { StoryMotion } from "@/components/StoryMotion";
 import { SoundControl } from "@/components/SoundControl";
 
@@ -12,7 +12,7 @@ function dateLabel(date: Date) {
 
 export default async function Home() {
   const allEntries = await getEntries();
-  const entries = allEntries.filter((entry) => !entry.isSample);
+  const entries = allEntries.filter((entry) => !entry.isSample && dayKey(entry.startedAt) >= RECORD_START);
   const todayEntries = entries.filter((entry) => dayKey(entry.startedAt) === dayKey(new Date()));
   const todayTotal = totalMinutes(todayEntries);
   const recent = entries.slice(0, 5);
@@ -60,7 +60,7 @@ export default async function Home() {
       <header className="cinema-nav">
         <a href="#top" className="cinema-logo" aria-label="Saim, home" data-magnetic>S.</a>
         <p>PRODUCT BUILDER<br /><span>ISLAMABAD / 2026</span></p>
-        <nav><a href="#vexilot">Vexilot</a><a href="#today">Today</a><Link href="/studio">Log in ↗</Link><SoundControl /></nav>
+        <nav><a href="#vexilot">Vexilot</a><a href="#today">Today</a><Link href="/journey">Living record ↗</Link><SoundControl /></nav>
         <Link href="/journey" className="journey-nav" data-magnetic><strong>↺</strong><span>LIVING RECORD<br /><b>REWIND THE DAYS ↗</b></span></Link>
       </header>
 
