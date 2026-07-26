@@ -1,7 +1,18 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
+// import "./globals.css";
+// import "./becoming.css";
+// import "./ledger.css";
+
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./becoming.css";
 import "./ledger.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 
 export const metadata: Metadata = {
   title: "Muhammad Saim | Product Instinct in Motion",

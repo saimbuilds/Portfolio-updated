@@ -23,7 +23,9 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .skip-link { position:fixed; z-index:3000; left:18px; top:18px; padding:12px 16px; background:var(--bone); color:var(--graphite); font:500 11px var(--mono); text-decoration:none; transform:translateY(-160%); transition:transform .3s ease-out; }
 .skip-link:focus { transform:translateY(0); }
 
-.cinema-loader { position:fixed; inset:0; z-index:2000; overflow:hidden; background:transparent; color:#eeeee8; }
+/* .cinema-loader { position:fixed; inset:0; z-index:2000; overflow:hidden; background:transparent; color:#eeeee8; } */
+.cinema-loader { position:fixed; inset:0; z-index:2000; overflow:hidden; background:transparent; color:#eeeee8; display:none; }
+.cinema-loader.loader-show { display:block; }
 .cinema-loader-wash { position:absolute; inset:-2px; background:#090a0a; transform:scaleY(1); will-change:transform; }
 .cinema-loader-copy { position:absolute; z-index:1; left:clamp(24px,6vw,88px); right:clamp(24px,6vw,88px); top:50%; transform:translateY(-50%); }
 .cinema-loader-monogram { display:block; width:min(72vw,840px); height:auto; margin-inline:auto; overflow:visible; transform-box:fill-box; transform-origin:center; }

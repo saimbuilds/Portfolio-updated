@@ -9,13 +9,22 @@ export function StoryMotion() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const lenis = reduced ? null : new Lenis({
+    // NOTE: We intentionally ignore prefers-reduced-motion here so animations always
+    // run on real devices. The iOS Accessibility setting was silently killing everything.
+    // CSS handles reduced motion for decorative effects (see globals.css).
+    const reduced = false;
+
+    // Detect touch-only device (real phone/tablet) — Lenis smooth scroll fights
+    // native iOS momentum scroll and breaks ScrollTrigger on real devices.
+    const isTouchOnly = window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+
+    const lenis = isTouchOnly ? null : new Lenis({
       duration: 1.25,
       smoothWheel: true,
       wheelMultiplier: 0.78,
       anchors: true,
     });
+
 
     let animationFrame = 0;
     let hashTimer = 0;
@@ -32,26 +41,66 @@ export function StoryMotion() {
     const searchParams = new URLSearchParams(window.location.search);
     const skipLoader = searchParams.has("skipLoader");
     const showLoader = !reduced && !skipLoader;
+
+    const lockScrollY = window.scrollY;
+    const lockScroll = () => {
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${lockScrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+    };
+    const unlockScroll = () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, lockScrollY);
+    };
     const loader = document.querySelector<HTMLElement>(".cinema-loader");
-    if (!showLoader) loader?.classList.add("loader-skip");
-    else document.body.style.overflow = "hidden";
+    if (!showLoader) {
+      loader?.classList.add("loader-skip");
+    } else {
+      loader?.classList.add("loader-show");
+      lockScroll();
+    }
+
+    // Helper: refresh ScrollTrigger after a delay to let mobile browser chrome settle
+    const refreshScrollTrigger = () => {
+      // On mobile, the viewport height changes as the browser chrome hides/shows.
+      // We need to wait for the layout to settle before refreshing ScrollTrigger.
+      // Use a 300ms delay + one extra rAF to ensure we get the final dimensions.
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh(true);
+        });
+      }, 300);
+    };
 
     const context = gsap.context(() => {
-      if (!reduced) {
-        const introTimeline = gsap.timeline({ paused: true, defaults: { ease: "power4.out" } })
+      // Build the intro timeline regardless — it'll be played after loader or immediately
+      const introTimeline = reduced
+        ? null
+        : gsap.timeline({ paused: true, defaults: { ease: "power4.out" } })
           .from("[data-hero-line]", { yPercent: 110, duration: 1.25, stagger: 0.12 })
           .from("[data-hero-copy]", { y: 24, opacity: 0, duration: 0.75, stagger: 0.08 }, "-=0.75")
           .from("[data-product-frame]", { xPercent: 20, yPercent: 12, rotate: 8, opacity: 0, duration: 1.05 }, "-=0.8");
 
+      if (!reduced) {
         if (showLoader) {
           let loaderFinished = false;
           const finishLoader = () => {
             if (loaderFinished) return;
             loaderFinished = true;
             if (loaderFallback) window.clearTimeout(loaderFallback);
-            document.body.style.overflow = "";
+            unlockScroll();
             loader?.classList.add("loader-skip");
-            introTimeline.play(0);
+            if (loader) loader.style.display = "none";
+            introTimeline?.play(0);
+            refreshScrollTrigger();
           };
 
           // Always set fallback timer FIRST so animation errors never block the site
@@ -100,10 +149,12 @@ export function StoryMotion() {
               const dotY = Number(portalDot.getAttribute("cy") || "198");
               const screenX = (matrix && typeof matrix.a === "number") ? (matrix.a * dotX + matrix.c * dotY + matrix.e) : window.innerWidth / 2;
               const screenY = (matrix && typeof matrix.b === "number") ? (matrix.b * dotX + matrix.d * dotY + matrix.f) : window.innerHeight / 2;
-              const coverScale = Math.hypot(
-                Math.max(screenX, window.innerWidth - screenX),
-                Math.max(screenY, window.innerHeight - screenY),
-              ) / 9 + 4;
+              const coverScale = Number.isFinite(screenX) && Number.isFinite(screenY)
+                ? Math.hypot(
+                    Math.max(screenX, window.innerWidth - screenX),
+                    Math.max(screenY, window.innerHeight - screenY),
+                  ) / 9 + 4
+                : 200;
               gsap.set(portalField, { left: screenX - 9, top: screenY - 9, scale: 0 });
 
               loaderTimeline
@@ -119,7 +170,9 @@ export function StoryMotion() {
             finishLoader();
           }
         } else {
-          introTimeline.play(0);
+          // No loader — play hero intro immediately then refresh ScrollTrigger
+          introTimeline?.play(0);
+          refreshScrollTrigger();
         }
 
         const heroTimeline = gsap.timeline({
@@ -332,8 +385,13 @@ export function StoryMotion() {
         }
       }
 
-      window.requestAnimationFrame(() => ScrollTrigger.refresh());
+      // ScrollTrigger is refreshed after animations via refreshScrollTrigger() above
     });
+
+    // const target = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
+    const refreshOnLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refreshOnLoad);
+    window.addEventListener("orientationchange", refreshOnLoad);
 
     const target = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
     if (target) {
@@ -344,13 +402,24 @@ export function StoryMotion() {
       }, 120);
     }
 
+    // return () => {
+    //   context.revert();
+    //   lenis?.destroy();
+    //   cancelAnimationFrame(animationFrame);
+    //   window.clearTimeout(hashTimer);
+    //   window.clearTimeout(loaderFallback);
+    //   document.body.style.overflow = "";
+    //   interactionCleanups.forEach((cleanup) => cleanup());
+    // };
     return () => {
       context.revert();
       lenis?.destroy();
       cancelAnimationFrame(animationFrame);
       window.clearTimeout(hashTimer);
       window.clearTimeout(loaderFallback);
-      document.body.style.overflow = "";
+      window.removeEventListener("load", refreshOnLoad);
+      window.removeEventListener("orientationchange", refreshOnLoad);
+      unlockScroll();
       interactionCleanups.forEach((cleanup) => cleanup());
     };
   }, []);
