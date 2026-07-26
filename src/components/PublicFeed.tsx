@@ -11,7 +11,7 @@ export function PublicFeed({ entries }: { entries: Entry[] }) {
           <div className="feed-rail"><span>{String(index + 1).padStart(2, "0")}</span><i /></div>
           <div className="feed-time"><time>{longDate(entry.startedAt)}</time><span>{new Date(entry.startedAt).toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit" })}</span></div>
           <div className="feed-body">
-            <div className="feed-label"><span className={`category category-${entry.category}`}>{entry.category}</span><span>{formatMinutes(entry.durationMinutes)} invested</span>{entry.isSample && <span className="sample-label">sample — replace in studio</span>}</div>
+            <div className="feed-label"><span className={`category category-${entry.category}`}>{entry.category}</span><span>{formatMinutes(entry.durationMinutes)} invested</span>{entry.isSample && <span className="sample-label">sample: replace in studio</span>}</div>
             <h3>{entry.title}</h3>
             {entry.detail && <p>{entry.detail}</p>}
             {entry.evidenceUrl && <a href={entry.evidenceUrl} target="_blank" rel="noreferrer">evidence ↗</a>}

@@ -213,7 +213,7 @@ export function MomentumGraph({ entries, onSelectDay, selectedDayKey }: Momentum
           {/* Curved line */}
           {pathD && <path d={pathD} fill="none" stroke="#a14335" strokeWidth="2" className="momentum-curve-line" />}
 
-          {/* Per-day dots — always visible */}
+          {/* Per-day dots: always visible */}
           {points.map((pt) => {
             const isSelected = selectedDayKey === pt.key;
             const isHovered = hoveredKey === pt.key;
@@ -266,7 +266,7 @@ export function MomentumGraph({ entries, onSelectDay, selectedDayKey }: Momentum
           </div>
         ) : (
           <span className="tooltip-hint">
-            Hover any dot to inspect that day — peaks show heavy work, dips show lighter days
+            Hover any dot to inspect that day: peaks show heavy work, dips show lighter days
           </span>
         )}
       </footer>

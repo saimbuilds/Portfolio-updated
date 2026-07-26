@@ -22,7 +22,7 @@ export function formatTime12h(value: string | Date) {
   }).format(date);
 }
 
-/** Public record days follow normal Pakistan calendar days: 00:00–23:59 PKT. */
+/** Public record days follow normal Pakistan calendar days: 00:00 to 23:59 PKT. */
 export function dayKey(value: string | Date) {
   const date = typeof value === "string" ? new Date(value) : new Date(value);
   const pakistan = new Date(date.getTime() + 5 * 60 * 60 * 1000);

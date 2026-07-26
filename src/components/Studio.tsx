@@ -66,7 +66,7 @@ export function Studio({ initialEntries }: { initialEntries: Entry[] }) {
         plannedMinutes: manual ? undefined : Math.min(planned, 120), durationMinutes: manual ? Math.min(duration, 120) : 0, category, title, detail, reflection,
         evidenceUrls: evidence ? [evidence] : [], isPublic: false });
       setEntries((current) => [data, ...current]); setTitle(""); setDetail(""); setReflection(""); setEvidence("");
-      setStatus(manual ? "Saved privately. Approve it when ready." : "Focus block started. Stopping closes it—there is no pause.");
+      setStatus(manual ? "Saved privately. Approve it when ready." : "Focus block started. Stopping closes it. There is no pause.");
     } catch (error) { setStatus(error instanceof Error ? error.message : "Could not save."); } finally { setSaving(false); }
   }
 
@@ -133,7 +133,7 @@ export function Studio({ initialEntries }: { initialEntries: Entry[] }) {
         <div className="field title-field"><label htmlFor="title">What will move?</label><input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="A clear, honest sentence" required maxLength={100} /></div>
         <div className="capture-grid">{manual && <div className="field"><label>Started</label><input type="datetime-local" value={startedAt} onChange={(e) => setStartedAt(e.target.value)} /></div>}<div className="field duration-field"><label>{manual ? "Focused time" : "Intended block"} / max 2h</label><input type="number" min="1" max="120" value={manual ? duration : planned} onChange={(e) => manual ? setDuration(Math.min(120, Number(e.target.value))) : setPlanned(Math.min(120, Number(e.target.value)))} /><span>minutes</span></div></div>
         <div className="field"><label>Notes / what are you doing?</label><textarea value={detail} onChange={(e) => setDetail(e.target.value)} maxLength={1000} /></div>
-        <div className="field"><label>Reflection</label><textarea value={reflection} onChange={(e) => setReflection(e.target.value)} placeholder="Optional — what changed in your understanding?" maxLength={1200} /></div>
+        <div className="field"><label>Reflection</label><textarea value={reflection} onChange={(e) => setReflection(e.target.value)} placeholder="Optional: what changed in your understanding?" maxLength={1200} /></div>
         <div className="capture-grid"><div className="field"><label>Evidence link</label><input type="text" value={evidence} onChange={(e) => setEvidence(e.target.value)} placeholder="GitHub, lecture, note…" /></div><div className="field"><label>Optional screenshot / 5 MB max</label><input type="file" accept="image/png,image/jpeg,image/webp" onChange={(e) => uploadScreenshot(e.target.files?.[0])} /></div></div>
         <div className="form-submit"><p className={status ? "visible" : ""}>{status || "Private by default"}</p><button disabled={saving}>{saving ? "Saving…" : manual ? "Save private draft" : "Start focus block"}<span>↗</span></button></div>
       </form></section>}
