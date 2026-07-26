@@ -48,50 +48,76 @@ export function StoryMotion() {
           const finishLoader = () => {
             if (loaderFinished) return;
             loaderFinished = true;
-            window.clearTimeout(loaderFallback);
+            if (loaderFallback) window.clearTimeout(loaderFallback);
             document.body.style.overflow = "";
             loader?.classList.add("loader-skip");
             introTimeline.play(0);
           };
-          const loaderTimeline = gsap.timeline({ onComplete: finishLoader });
-          const inkStrokes = gsap.utils.toArray<SVGPathElement>(".loader-draw-path");
-          const portalDot = document.querySelector<SVGCircleElement>(".loader-portal-dot");
-          const portalField = document.querySelector<HTMLElement>(".loader-portal-field");
-          inkStrokes.forEach((stroke) => {
-            const length = stroke.getTotalLength();
-            gsap.set(stroke, { strokeDasharray: `${length + 2} ${length + 2}`, strokeDashoffset: length + 2 });
-          });
-          inkStrokes.forEach((stroke) => {
-            const length = stroke.getTotalLength();
-            loaderTimeline.set(stroke, { opacity: 1 });
-            loaderTimeline.to(stroke, {
-              strokeDashoffset: 0,
-              duration: Math.max(.16, length / 800),
-              ease: "none",
-            });
-          });
-          if (portalDot && portalField) {
-            const matrix = portalDot.getScreenCTM();
-            const dotX = Number(portalDot.getAttribute("cx"));
-            const dotY = Number(portalDot.getAttribute("cy"));
-            const screenX = matrix ? matrix.a * dotX + matrix.c * dotY + matrix.e : window.innerWidth / 2;
-            const screenY = matrix ? matrix.b * dotX + matrix.d * dotY + matrix.f : window.innerHeight / 2;
-            const coverScale = Math.hypot(
-              Math.max(screenX, window.innerWidth - screenX),
-              Math.max(screenY, window.innerHeight - screenY),
-            ) / 9 + 4;
-            gsap.set(portalField, { left: screenX - 9, top: screenY - 9, scale: 0 });
 
-            loaderTimeline
-              .to(portalDot, { attr: { r: 9 }, duration: .16, ease: "power2.out" })
-              .to({}, { duration: .32 })
-              .set(portalField, { scale: 1 })
-              .set(portalDot, { visibility: "hidden" })
-              .to(portalField, { scale: coverScale, backgroundColor: "#a7bdc1", duration: 1.08, ease: "power3.inOut", force3D: true })
-              .to({}, { duration: .1 })
-              .set(".cinema-loader-wash", { opacity: 0 });
+          // Always set fallback timer FIRST so animation errors never block the site
+          loaderFallback = window.setTimeout(finishLoader, 3200);
+
+          try {
+            const loaderTimeline = gsap.timeline({ onComplete: finishLoader });
+            const inkStrokes = gsap.utils.toArray<SVGPathElement>(".loader-draw-path");
+            const portalDot = document.querySelector<SVGCircleElement>(".loader-portal-dot");
+            const portalField = document.querySelector<HTMLElement>(".loader-portal-field");
+
+            inkStrokes.forEach((stroke) => {
+              let length = 600;
+              try {
+                length = stroke.getTotalLength() || 600;
+              } catch {
+                length = 600;
+              }
+              gsap.set(stroke, { strokeDasharray: `${length + 2} ${length + 2}`, strokeDashoffset: length + 2 });
+            });
+
+            inkStrokes.forEach((stroke) => {
+              let length = 600;
+              try {
+                length = stroke.getTotalLength() || 600;
+              } catch {
+                length = 600;
+              }
+              loaderTimeline.set(stroke, { opacity: 1 });
+              loaderTimeline.to(stroke, {
+                strokeDashoffset: 0,
+                duration: Math.max(.16, length / 800),
+                ease: "none",
+              });
+            });
+
+            if (portalDot && portalField) {
+              let matrix: DOMMatrix | null = null;
+              try {
+                matrix = portalDot.getScreenCTM();
+              } catch {
+                matrix = null;
+              }
+
+              const dotX = Number(portalDot.getAttribute("cx") || "696");
+              const dotY = Number(portalDot.getAttribute("cy") || "198");
+              const screenX = (matrix && typeof matrix.a === "number") ? (matrix.a * dotX + matrix.c * dotY + matrix.e) : window.innerWidth / 2;
+              const screenY = (matrix && typeof matrix.b === "number") ? (matrix.b * dotX + matrix.d * dotY + matrix.f) : window.innerHeight / 2;
+              const coverScale = Math.hypot(
+                Math.max(screenX, window.innerWidth - screenX),
+                Math.max(screenY, window.innerHeight - screenY),
+              ) / 9 + 4;
+              gsap.set(portalField, { left: screenX - 9, top: screenY - 9, scale: 0 });
+
+              loaderTimeline
+                .to(portalDot, { attr: { r: 9 }, duration: .16, ease: "power2.out" })
+                .to({}, { duration: .32 })
+                .set(portalField, { scale: 1 })
+                .set(portalDot, { visibility: "hidden" })
+                .to(portalField, { scale: coverScale, backgroundColor: "#a7bdc1", duration: 1.08, ease: "power3.inOut", force3D: true })
+                .to({}, { duration: .1 })
+                .set(".cinema-loader-wash", { opacity: 0 });
+            }
+          } catch {
+            finishLoader();
           }
-          loaderFallback = window.setTimeout(finishLoader, 5000);
         } else {
           introTimeline.play(0);
         }
