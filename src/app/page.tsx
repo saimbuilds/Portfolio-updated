@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getEntries } from "@/lib/entries";
-import { dayKey, formatMinutes, RECORD_START, totalMinutes } from "@/lib/format";
+import { dayKey, formatMinutes, formatTime12h, RECORD_START, totalMinutes } from "@/lib/format";
 import { StoryMotion } from "@/components/StoryMotion";
 import { SoundControl } from "@/components/SoundControl";
 
@@ -213,7 +213,7 @@ export default async function Home() {
             {recent.length ? recent.map((entry, index) => (
               <article key={entry.id} data-reveal>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <time>{new Date(entry.startedAt).toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit" })}</time>
+                <time>{formatTime12h(entry.startedAt)}</time>
                 <div><small>{entry.category}</small><h3>{entry.title}</h3>{entry.detail && <p>{entry.detail}</p>}</div>
                 <strong>{formatMinutes(entry.durationMinutes)}</strong>
               </article>

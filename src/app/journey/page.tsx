@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { JourneyMotion } from "@/components/JourneyMotion";
-import { JourneyArchive } from "@/components/JourneyArchive";
+import { JourneyDashboard } from "@/components/JourneyDashboard";
 import { getEntries } from "@/lib/entries";
+import { getGoals } from "@/lib/goals";
 import { dayKey, formatMinutes, RECORD_START, totalMinutes } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,7 @@ function dateFromKey(key: string) {
 
 export default async function JourneyPage() {
   const entries = (await getEntries()).filter((entry) => !entry.isSample && dayKey(entry.startedAt) >= RECORD_START);
+  const goals = await getGoals();
   const grouped = new Map<string, typeof entries>();
   entries.forEach((entry) => grouped.set(dayKey(entry.startedAt), [...(grouped.get(dayKey(entry.startedAt)) || []), entry]));
 
@@ -61,21 +63,7 @@ export default async function JourneyPage() {
       <div><span>DAY ZERO</span><strong>{new Date(`${RECORD_START}T12:00:00+05:00`).toLocaleDateString("en", { day: "2-digit", month: "short" })}</strong><small>Where this record began</small></div>
     </section>
 
-    <section className="week-view ledger-shell">
-      <header><div><span>THE LAST SEVEN DAYS</span><h2>A week at a glance.</h2></div><p>Each column is one day. Its height shows the time recorded—not a score, streak, or judgement.</p></header>
-      <div className="week-grid" style={{ "--day-count": recentDays.length } as CSSProperties}>
-        {recentDays.slice().reverse().map(({ key, records }) => {
-          const minutes = totalMinutes(records);
-          const height = Math.max(3, Math.min(100, minutes / 3));
-          return <a href={`#day-${key}`} key={key} className={key === todayKey ? "is-today" : ""}>
-            <div className="week-bar"><i style={{ height: `${height}%` }}/><b>{minutes ? formatMinutes(minutes) : "—"}</b></div>
-            <span>{dateFromKey(key).toLocaleDateString("en", { weekday: "short" })}</span><time>{dateFromKey(key).toLocaleDateString("en", { day: "2-digit" })}</time>
-          </a>;
-        })}
-      </div>
-    </section>
-
-    <JourneyArchive days={days}/>
+    <JourneyDashboard goals={goals} entries={entries} days={days} />
     <footer className="ledger-footer ledger-shell"><span>MUHAMMAD SAIM / LIVING RECORD</span><Link href="/">RETURN TO PORTFOLIO ↗</Link></footer>
   </main>;
 }

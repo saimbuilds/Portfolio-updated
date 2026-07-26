@@ -1,45 +1,30 @@
 [
   {
-    "startedAt": "2026-07-24T07:18:00.000Z",
-    "durationMinutes": 60,
-    "category": "watch",
-    "title": "Learned typescript basics",
-    "detail": "",
-    "evidenceUrl": "",
-    "id": "601e91dd-f5c4-46f9-9eb3-d502fd77ab5b",
-    "createdAt": "2026-07-24T07:18:43.122Z"
-  },
-  {
-    "id": "welcome-2",
-    "startedAt": "2026-07-24T11:15:00.000Z",
-    "durationMinutes": 135,
-    "category": "watch",
-    "title": "Full-stack, from first principles",
-    "detail": "Going deeper than tutorials: understanding how the browser, server, database, and deployment fit together.",
-    "evidenceUrl": "",
-    "isSample": true,
-    "createdAt": "2026-07-24T13:30:00.000Z"
-  },
-  {
-    "id": "welcome-1",
-    "startedAt": "2026-07-24T09:00:00.000Z",
-    "durationMinutes": 90,
+    "id": "entry-2026-07-25-hacknation-1",
+    "startedAt": "2026-07-25T03:00:00.000Z",
+    "endedAt": "2026-07-25T06:00:00.000Z",
+    "durationMinutes": 180,
     "category": "build",
-    "title": "Opened the public log",
-    "detail": "A starting point for recording the work as it really happens — including the unfinished days.",
+    "title": "HackNation Hackathon — Product Sprint & Core Build",
+    "detail": "Intensive build session at HackNation. Designed and shipped the core product flow end-to-end: ideation, architecture, and working prototype in 3 hours. Team of 3, full-stack Next.js + Supabase.",
+    "reflection": "When the deadline is real and the stakes are visible, you build differently. No overthinking — just ship.",
     "evidenceUrl": "",
-    "isSample": true,
-    "createdAt": "2026-07-24T10:30:00.000Z"
+    "status": "completed",
+    "isPublic": true,
+    "createdAt": "2026-07-25T06:00:00.000Z"
   },
   {
-    "id": "welcome-3",
-    "startedAt": "2026-07-23T15:00:00.000Z",
-    "durationMinutes": 45,
-    "category": "watch",
-    "title": "A conversation that changed the question",
-    "detail": "The useful question was not “how do I grow?” but “who already has the trust?”",
+    "id": "entry-2026-07-25-hacknation-2",
+    "startedAt": "2026-07-25T07:00:00.000Z",
+    "endedAt": "2026-07-25T10:00:00.000Z",
+    "durationMinutes": 180,
+    "category": "build",
+    "title": "HackNation Hackathon — Pitch Deck, Demo & Presentation",
+    "detail": "Built the live demo, polished the UI, scripted and rehearsed the 3-minute pitch. Presented to a panel of judges across product, tech, and business verticals.",
+    "reflection": "Pitch clarity matters as much as the product. One sharp insight landed better than five features.",
     "evidenceUrl": "",
-    "isSample": true,
-    "createdAt": "2026-07-23T15:45:00.000Z"
+    "status": "completed",
+    "isPublic": true,
+    "createdAt": "2026-07-25T10:00:00.000Z"
   }
 ]

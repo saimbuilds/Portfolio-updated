@@ -97,6 +97,18 @@ export function Studio({ initialEntries }: { initialEntries: Entry[] }) {
     const data=await response.json(); if(!response.ok){setStatus(data.error||"Could not create goal.");return;} setGoals((current)=>[data,...current]);setGoalTitle("");setStatus("Public accountability goal created.");
   }
 
+  async function removeGoal(id: string) {
+    if (!window.confirm("Remove this goal?")) return;
+    try {
+      const response = await fetch(`/api/goals?id=${id}`, { method: "DELETE", headers });
+      if (!response.ok) throw new Error();
+      setGoals((current) => current.filter((g) => g.id !== id));
+      setStatus("Goal removed.");
+    } catch {
+      setStatus("Could not remove goal.");
+    }
+  }
+
   async function remove(id: string) {
     if (!window.confirm("Permanently remove this private record?")) return;
     try { const response = await fetch(`/api/entries?id=${id}`, { method: "DELETE", headers }); if (!response.ok) throw new Error(); setEntries((current) => current.filter((entry) => entry.id !== id)); }
@@ -127,7 +139,7 @@ export function Studio({ initialEntries }: { initialEntries: Entry[] }) {
       </form></section>}
 
       {status && <p className="studio-status">{status}</p>}
-      <section className="goal-studio"><div><span>PUBLIC ACCOUNTABILITY</span><h2>Set the pressure.</h2><p>Goals become visible immediately. Their progress is backed by the record.</p></div><form onSubmit={addGoal}><input value={goalTitle} onChange={(e)=>setGoalTitle(e.target.value)} placeholder={goalMetric === "checklist" ? "Complete MIT Finance playlist" : goalMetric === "streak" ? "Build every day" : "Read one book this week"} required/><select value={goalMetric} onChange={(e)=>{const metric=e.target.value as Goal["metric"];setGoalMetric(metric);setGoalTarget(metric==="minutes"?10:metric==="streak"?7:1)}}><option value="minutes">Focused hours</option><option value="count">Completed count</option><option value="checklist">Checklist items</option><option value="streak">Daily streak</option></select><label className="goal-target"><span>Target / {goalUnit}</span><input type="number" min="1" value={goalTarget} onChange={(e)=>setGoalTarget(Number(e.target.value))}/></label><button>Create public goal ↗</button></form><aside>{goals.map((goal)=><div key={goal.id}><span>{goal.period} / {goal.metric}</span><strong>{goal.title}</strong><i>{goal.metric === "minutes" ? `${formatMinutes(goal.current)} / ${formatMinutes(goal.target)}` : `${goal.current} / ${goal.target}`}</i></div>)}</aside></section>
+      <section className="goal-studio"><div><span>PUBLIC ACCOUNTABILITY</span><h2>Set the pressure.</h2><p>Goals become visible immediately. Their progress is backed by the record.</p></div><form onSubmit={addGoal}><input value={goalTitle} onChange={(e)=>setGoalTitle(e.target.value)} placeholder={goalMetric === "checklist" ? "Complete MIT Finance playlist" : goalMetric === "streak" ? "Build every day" : "Read one book this week"} required/><select value={goalMetric} onChange={(e)=>{const metric=e.target.value as Goal["metric"];setGoalMetric(metric);setGoalTarget(metric==="minutes"?10:metric==="streak"?7:1)}}><option value="minutes">Focused hours</option><option value="count">Completed count</option><option value="checklist">Checklist items</option><option value="streak">Daily streak</option></select><label className="goal-target"><span>Target / {goalUnit}</span><input type="number" min="1" value={goalTarget} onChange={(e)=>setGoalTarget(Number(e.target.value))}/></label><button>Create public goal ↗</button></form><aside>{goals.map((goal)=><div key={goal.id} className="goal-row"><div><span>{goal.period} / {goal.metric}</span><strong>{goal.title}</strong></div><button type="button" onClick={()=>removeGoal(goal.id)} className="goal-delete-btn" title="Remove goal">×</button></div>)}</aside></section>
       <section className="today-list"><div className="capture-heading"><span>Private review queue</span><span>{entries.length.toString().padStart(2, "0")} records</span></div>{entries.filter((e) => e.status !== "active").map((entry) => <article key={entry.id} className={entry.status === "interrupted" ? "is-interrupted" : ""}><time>{new Date(entry.startedAt).toLocaleDateString("en", { day: "2-digit", month: "short" })}</time><span className={`category category-${entry.category}`}>{entry.category}</span><div><h3>{entry.title}</h3><p>{entry.status}{entry.plannedMinutes ? ` · ${entry.durationMinutes}/${entry.plannedMinutes}m` : ""}</p></div><strong>{formatMinutes(entry.durationMinutes)}</strong><div className="review-actions"><button onClick={() => publish(entry)}>{entry.isPublic ? "Hide" : "Publish"}</button><button onClick={() => remove(entry.id)}>×</button></div></article>)}</section>
     </div>
   );

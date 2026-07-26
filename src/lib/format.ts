@@ -1,8 +1,8 @@
 import type { Entry } from "@/types/entry";
 
-export const RECORD_START = "2026-07-25";
+export const RECORD_START = "2026-07-24";
 export const RECORD_TIME_ZONE = "Asia/Karachi";
-export const DAY_START_HOUR = 0;
+export const DAY_START_HOUR = 5;
 
 export function formatMinutes(minutes: number) {
   const safe = Math.max(0, Math.round(minutes));
@@ -10,6 +10,16 @@ export function formatMinutes(minutes: number) {
   const mins = safe % 60;
   if (!hours) return `${mins}m`;
   return mins ? `${hours}h ${mins}m` : `${hours}h`;
+}
+
+export function formatTime12h(value: string | Date) {
+  const date = typeof value === "string" ? new Date(value) : value;
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: RECORD_TIME_ZONE,
+  }).format(date);
 }
 
 /** Public record days follow normal Pakistan calendar days: 00:00–23:59 PKT. */

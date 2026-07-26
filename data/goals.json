@@ -1,0 +1,45 @@
+[
+  {
+    "id": "goal-1",
+    "title": "Build Vexilot 2.0 Core Features",
+    "metric": "minutes",
+    "target": 600,
+    "current": 270,
+    "period": "week",
+    "category": "build",
+    "isPublic": true,
+    "createdAt": "2026-07-20T00:00:00.000Z"
+  },
+  {
+    "id": "goal-2",
+    "title": "Complete 5 Product Focus Blocks",
+    "metric": "count",
+    "target": 5,
+    "current": 2,
+    "period": "week",
+    "category": "build",
+    "isPublic": true,
+    "createdAt": "2026-07-20T00:00:00.000Z"
+  },
+  {
+    "id": "goal-3",
+    "title": "7-Day Continuous Building Streak",
+    "metric": "streak",
+    "target": 7,
+    "current": 4,
+    "period": "week",
+    "isPublic": true,
+    "createdAt": "2026-07-20T00:00:00.000Z"
+  },
+  {
+    "id": "goal-4",
+    "title": "Read 2 Architecture & Strategy Guides",
+    "metric": "count",
+    "target": 2,
+    "current": 1,
+    "period": "week",
+    "category": "read",
+    "isPublic": true,
+    "createdAt": "2026-07-20T00:00:00.000Z"
+  }
+]

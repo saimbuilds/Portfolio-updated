@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Category, Entry } from "@/types/entry";
-import { dayKey, formatMinutes, RECORD_START, totalMinutes } from "@/lib/format";
+import { dayKey, formatMinutes, formatTime12h, RECORD_START, totalMinutes } from "@/lib/format";
 
 type ArchiveDay = { key: string; records: Entry[] };
 type Filter = "all" | Category;
@@ -11,7 +11,7 @@ function evidenceHref(value: string) {
   return value.startsWith("http") ? value : `/api/evidence?path=${encodeURIComponent(value)}`;
 }
 
-export function JourneyArchive({ days }: { days: ArchiveDay[] }) {
+export function JourneyArchive({ days, selectedDayKey }: { days: ArchiveDay[]; selectedDayKey?: string | null }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
   const today = dayKey(new Date());
@@ -29,7 +29,7 @@ export function JourneyArchive({ days }: { days: ArchiveDay[] }) {
     if (!key) return;
     setFilter("all");
     setQuery("");
-    window.setTimeout(() => document.getElementById(`day-${key}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+    window.setTimeout(() => document.getElementById(`day-${key}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   };
 
   return <section className="ledger-archive ledger-shell" id="history">
@@ -50,10 +50,10 @@ export function JourneyArchive({ days }: { days: ArchiveDay[] }) {
 
     <div className="archive-result-line"><p aria-live="polite">{visible.length} {visible.length === 1 ? "day" : "days"} shown</p>{(query || filter !== "all") && <button type="button" onClick={() => { setQuery(""); setFilter("all"); }}>CLEAR FILTERS ×</button>}</div>
 
-    {visible.length ? visible.map(({ key, records }) => <article key={key} id={`day-${key}`} data-day-reveal className={!records.length ? "is-empty-day" : ""}>
+    {visible.length ? visible.map(({ key, records }) => <article key={key} id={`day-${key}`} data-day-reveal className={`day-article ${!records.length ? "is-empty-day" : ""} ${selectedDayKey === key ? "is-highlighted-day" : ""}`}>
       <div><time>{new Date(`${key}T12:00:00+05:00`).toLocaleDateString("en",{weekday:"long",day:"2-digit",month:"long",year:"numeric"})}</time><strong>{formatMinutes(totalMinutes(records))}</strong>{key === today && <span className="today-marker">TODAY</span>}</div>
       <section>{records.length ? records.map((entry) => <div key={entry.id} className={entry.status === "interrupted" ? "interrupted" : ""}>
-        <span>{entry.category}</span><h3>{entry.title}</h3>{entry.detail && <p>{entry.detail}</p>}
+        <span>{entry.category} · {formatTime12h(entry.startedAt)}</span><h3>{entry.title}</h3>{entry.detail && <p>{entry.detail}</p>}
         <footer><b>{formatMinutes(entry.durationMinutes)}</b>{entry.status === "interrupted" && <i>INTERRUPTED / HONESTLY CLOSED</i>}{entry.evidenceUrls?.[0] && <a href={evidenceHref(entry.evidenceUrls[0])} target="_blank" rel="noreferrer">EVIDENCE ↗</a>}</footer>
       </div>) : <div className="day-empty-message"><h3>No work recorded.</h3><p>An empty day is part of the record too.</p></div>}</section>
     </article>) : <div className="ledger-empty">Nothing matches that filter. Clear it to return to the complete record.</div>}
