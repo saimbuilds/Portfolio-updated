@@ -136,7 +136,7 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .panel-pitch { background: var(--sky-deep); }
 .pitch-place { position: absolute; left: 5vw; top: 20vh; }
 .pitch-place span, .pitch-place small { display: block; font: 500 12px var(--mono); letter-spacing: .1em; }
-.pitch-place strong { display: block; margin-left: -2vw; font: 300 clamp(210px, 28vw, 430px)/.7 var(--mono); letter-spacing: -.14em; color: var(--bone); }
+.pitch-place strong { display: block; margin-top: 18px; margin-left: -2vw; font: 300 clamp(210px, 28vw, 430px)/.7 var(--mono); letter-spacing: -.14em; color: var(--bone); }
 .pitch-place small { margin: 24px 0 0 10vw; }
 .panel-pitch h2 { position: absolute; z-index: 2; right: 5vw; top: 22vh; margin: 0; text-align: right; font: 400 clamp(70px, 8vw, 124px)/.83 var(--sans); letter-spacing: -.075em; }
 .panel-pitch h2 em { font: 400 italic 1em var(--serif); color: var(--bone); }
@@ -214,11 +214,12 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .orbit-beat > span { font:500 11px var(--mono); letter-spacing:.1em; }
 .orbit-beat h3 { margin:30px 0 25px; font:400 clamp(72px,8vw,124px)/.82 var(--sans); letter-spacing:-.075em; }
 .orbit-beat h3 em { font:400 italic 1em var(--serif); color:var(--red); }
-.orbit-beat p { max-width:470px; margin-left:17vw; font-size:18px; line-height:1.55; }
+.orbit-beat p { max-width:470px; margin-left:0; font-size:18px; line-height:1.55; }
 .orbit-beat-one { left:7vw; top:18vh; }
 .orbit-beat-two { right:6vw; top:17vh; text-align:right; }
 .orbit-beat-two p { margin-left:auto; margin-right:8vw; text-align:left; }
 .orbit-beat-three { left:17vw; top:18vh; width:min(70vw,1050px); }
+.orbit-beat-three p { margin-left: 0; }
 .orbit-exit { position:absolute; z-index:5; inset:0; display:grid; place-content:center; text-align:center; opacity:0; will-change:transform,opacity; }
 .orbit-exit span { font:500 11px var(--mono); letter-spacing:.12em; }
 .orbit-exit strong { margin:38px 0 30px; font:400 clamp(90px,14vw,215px)/.66 var(--serif); letter-spacing:-.07em; }

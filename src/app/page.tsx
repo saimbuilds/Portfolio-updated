@@ -128,9 +128,9 @@ export default async function Home() {
 
             <article className="story-panel panel-pitch">
               <div className="panel-index"><span>04 / 04</span><span>THE PITCH</span></div>
-              <div className="pitch-place"><span>PARWAZ-E-TAKHYUL / 2026</span><strong>01</strong><small>FIRST OF SIXTEEN TEAMS</small></div>
+              <div className="pitch-place"><span>PARWAZ-E-TAKHYUL / 2026</span><strong>01</strong><small>FIRST OF 17 TEAMS · SOLO YOUNGEST BUILDER</small></div>
               <h2>I made the room<br /><em>believe.</em></h2>
-              <div className="pitch-ticket" data-tilt><span>CASH PRIZE</span><strong>PKR 40,000</strong><small>THE MOMENT CONFIDENCE BECAME EVIDENCE</small></div>
+              <div className="pitch-ticket" data-tilt><span>CASH PRIZE · 1ST PLACE</span><strong>PKR 40,000</strong><small>17 TEAMS PITCHING COMPETITION. SOLO YOUNGEST BUILDER IN THE ROOM, STILL TOOK 1ST PLACE.</small></div>
             </article>
           </div>
           <div className="horizontal-progress" aria-hidden="true"><i /></div>
