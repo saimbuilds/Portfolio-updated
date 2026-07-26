@@ -89,7 +89,7 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .today-now p { min-height: 52px; margin: 0 0 24px; font-size: 13px; line-height: 1.45; }
 .today-now a { text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 5px; }
 .hero-scroll { position: absolute; left: 48px; top: 48%; display: flex; gap: 18px; align-items: center; writing-mode: vertical-rl; font: 500 11px var(--mono); }
-.hero-scroll i { width: 34px; height: 34px; border: 1px solid currentColor; border-radius: 50%; display: grid; place-items: center; font-style: normal; }
+.hero-scroll i { width: 34px; height: 34px; border: 1px solid currentColor; border-radius: 50%; display: grid; place-items: center; font-style: normal; writing-mode: horizontal-tb; }
 .film-mark { position: absolute; z-index: 2; left: 1.3vw; bottom: 3vh; display: flex; align-items: center; gap: 9px; transform: rotate(-90deg); transform-origin: left; font: 500 11px var(--mono); }
 .film-mark i { width: 50px; height: 1px; background: currentColor; }
 
@@ -233,9 +233,10 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .daily-date span, .daily-date strong, .daily-date small { display: block; }
 .daily-date span, .daily-date small { font: 500 11px var(--mono); color: #66777b; }
 .daily-date strong { margin: 9px 0; font: 300 28px var(--mono); }
-.daily-summary { margin-top: 100px; display: grid; grid-template-columns: 1.2fr .8fr 1fr; border-block: 1px solid var(--graphite); }
+.daily-summary { margin-top: 100px; display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--graphite); }
 .daily-summary > div { min-height: 150px; padding: 25px; border-right: 1px solid var(--graphite); }
 .daily-summary > div:first-child { padding-left: 0; }
+.daily-summary > div:last-child { border-right: 0; }
 .daily-summary span, .daily-summary strong { display: block; }
 .daily-summary span { font: 500 11px var(--mono); }
 .daily-summary strong { margin-top: 32px; font: 300 34px var(--mono); }
@@ -247,10 +248,9 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .daily-list h3 { margin: 7px 0; font-size: 26px; font-weight: 500; letter-spacing: -.035em; }
 .daily-list p { max-width: 680px; margin: 0; color: #5e6a6d; font-size: 16px; line-height: 1.55; }
 .daily-list article > strong { text-align: right; }
-.daily-empty { min-height: 320px; display: grid; grid-template-columns: 170px 1fr; align-items: center; border-bottom: 1px solid var(--graphite); }
-.daily-empty > strong { font: 300 110px var(--mono); color: var(--sky-deep); letter-spacing: -.12em; }
-.daily-empty h3 { margin: 0 0 10px; font: 400 45px var(--serif); }
-.daily-empty p { margin: 0; font-size: 17px; color: #5e6a6d; }
+.daily-empty { min-height: 320px; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid var(--graphite); }
+.daily-nothing { margin: 0 0 18px; font: 400 clamp(120px, 18vw, 260px)/.82 var(--serif); letter-spacing: -.06em; color: var(--graphite); }
+.daily-nothing-sub { margin: 0; font-size: 17px; color: #5e6a6d; max-width: 520px; }
 .daily-cta { height: 95px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--graphite); font: 500 12px var(--mono); text-decoration: none; }
 .daily-cta i { width: 54px; height: 54px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-style: normal; transition: transform .4s ease-out, background .4s ease-out, color .4s ease-out; }
 .daily-cta:hover i { transform: rotate(45deg); background: var(--graphite); color: var(--bone); }
@@ -441,10 +441,9 @@ html:has(.cinema-site) { scroll-behavior: auto; }
   .daily-list article { grid-template-columns: 34px 1fr 60px; gap: 12px; padding: 28px 0; }
   .daily-list time, .daily-list p { display: none; }
   .daily-list h3 { font-size: 20px; }
-  .daily-empty { grid-template-columns: 85px 1fr; min-height: 250px; }
-  .daily-empty > strong { font-size: 60px; }
-  .daily-empty h3 { font-size: 30px; }
-  .daily-empty p { font-size: 14px; }
+  .daily-empty { min-height: 250px; }
+  .daily-nothing { font-size: clamp(80px, 22vw, 140px); }
+  .daily-nothing-sub { font-size: 14px; }
   .collaboration-call { min-height:100svh; padding:100px 0; }
   .collaboration-meta { display:block; font-size:10px; }
   .collaboration-meta span { display:block; margin-top:8px; }

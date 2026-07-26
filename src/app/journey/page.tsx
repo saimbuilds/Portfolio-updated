@@ -44,7 +44,7 @@ export default async function JourneyPage() {
       <div className="record-intro-copy">
         <span className="record-eyebrow"><i/> LIVE / {todayKey}</span>
         <h1>What I did.<br/><em>Day by day.</em></h1>
-        <p>This page updates when I finish a session in Studio. No polished story—just what I worked on, how long I spent, and when it happened.</p>
+        <p>This page updates when I finish a session in Studio. No polished story, just what I worked on, how long I spent, and when it happened.</p>
         <a href="#history">SEE THE FULL HISTORY ↓</a>
       </div>
 

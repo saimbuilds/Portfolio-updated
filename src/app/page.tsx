@@ -15,7 +15,7 @@ export default async function Home() {
   const entries = allEntries.filter((entry) => !entry.isSample && dayKey(entry.startedAt) >= RECORD_START);
   const todayEntries = entries.filter((entry) => dayKey(entry.startedAt) === dayKey(new Date()));
   const todayTotal = totalMinutes(todayEntries);
-  const recent = entries.slice(0, 5);
+
   const now = new Date();
 
   return (
@@ -60,8 +60,9 @@ export default async function Home() {
       <header className="cinema-nav">
         <a href="#top" className="cinema-logo" aria-label="Saim, home" data-magnetic>S.</a>
         <p>PRODUCT BUILDER<br /><span>ISLAMABAD / 2026</span></p>
-        <nav><a href="#vexilot">Vexilot</a><a href="#today">Today</a><Link href="/journey">Living record ↗</Link><SoundControl /></nav>
+        <nav><a href="#vexilot">Vexilot</a><a href="#today">Today</a><SoundControl /></nav>
         <Link href="/journey" className="journey-nav" data-magnetic><strong>↺</strong><span>LIVING RECORD<br /><b>REWIND THE DAYS ↗</b></span></Link>
+      
       </header>
 
       <section className="cinema-hero" id="top">
@@ -82,7 +83,7 @@ export default async function Home() {
             <p>THE PRODUCT THAT CHANGED<br />HOW I SEE MYSELF.</p>
           </div>
 
-          <p className="hero-intro" data-hero-copy>I’m Saim, a 19-year-old product builder. This portfolio is a living record of how I spot problems, shape products, make people believe—and do the daily work after the pitch.</p>
+          <p className="hero-intro" data-hero-copy>I’m Saim, a 19-year-old product builder. This portfolio is a living record of how I spot problems, shape products, make people believe and do the daily work after the pitch.</p>
         </div>
 
         <aside className="today-now" data-hero-copy>
@@ -173,7 +174,7 @@ export default async function Home() {
             <div className="portrait-copy" data-portrait-copy>
               <span>THE PERSON BEHIND THE PROOF / 04</span>
               <h2>Not a finished<br />founder.<br /><em>A visible one.</em></h2>
-              <p>I want the work, uncertainty and improvement to remain visible—not polished into a personality that never existed.</p>
+              <p>I want the work, uncertainty and improvement to remain visible, not polished into a personality that never existed.</p>
             </div>
           </div>
 
@@ -182,7 +183,7 @@ export default async function Home() {
             <div className="orbit-rings" data-orbit-rings aria-hidden="true"><i /><i /><i /><span>SAIM / BECOMING</span></div>
             <article className="orbit-beat orbit-beat-one" data-orbit-beat><span>01 / INSTINCT</span><h3>I notice product<br />problems.</h3><p>Before there is a roadmap, I can usually feel where the friction lives.</p></article>
             <article className="orbit-beat orbit-beat-two" data-orbit-beat><span>02 / PERSUASION</span><h3>I make people<br /><em>believe.</em></h3><p>A useful product still needs a story people can enter.</p></article>
-            <article className="orbit-beat orbit-beat-three" data-orbit-beat><span>03 / DISCIPLINE</span><h3>I stay after the<br />excitement ends.</h3><p>The daily record is where confidence becomes practice—or disappears.</p></article>
+            <article className="orbit-beat orbit-beat-three" data-orbit-beat><span>03 / DISCIPLINE</span><h3>I stay after the<br />excitement ends.</h3><p>The daily record is where confidence becomes practice or disappears.</p></article>
             <div className="orbit-exit" data-orbit-exit><span>THE PERSON IS STILL BECOMING</span><strong>NOT<br />FINISHED.</strong><i>↓</i></div>
           </div>
         </div>
@@ -198,11 +199,10 @@ export default async function Home() {
           <div className="daily-summary" data-reveal>
             <div><span>TIME RECORDED</span><strong>{formatMinutes(todayTotal)}</strong></div>
             <div><span>MOMENTS</span><strong>{todayEntries.length.toString().padStart(2, "0")}</strong></div>
-            <div><span>STATE</span><strong>{todayEntries.length ? "MOVING" : "UNWRITTEN"}</strong></div>
           </div>
 
           <div className="daily-list">
-            {recent.length ? recent.map((entry, index) => (
+            {todayEntries.length ? todayEntries.map((entry, index) => (
               <article key={entry.id} data-reveal>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <time>{formatTime12h(entry.startedAt)}</time>
@@ -210,22 +210,14 @@ export default async function Home() {
                 <strong>{formatMinutes(entry.durationMinutes)}</strong>
               </article>
             )) : (
-              <div className="daily-empty" data-reveal><strong>00</strong><div><h3>Nothing recorded yet.</h3><p>Not every day needs to look productive. It only needs to be honest.</p></div></div>
+              <div className="daily-empty" data-reveal>
+                <p className="daily-nothing">Nothing.</p>
+                <p className="daily-nothing-sub">Not every day needs to look productive. It only needs to be honest.</p>
+              </div>
             )}
           </div>
 
 
-        </div>
-      </section>
-
-      <section className="collaboration-call">
-        <div className="cinema-shell">
-          <div className="collaboration-meta"><span>WHAT I AM OPEN TO / NOW</span><span>PRODUCTS · INTERNSHIPS · FOUNDER CONVERSATIONS</span></div>
-          <h2 data-reveal>Bring me a difficult<br />product <em>problem.</em></h2>
-          <div className="collaboration-bottom">
-            <p data-reveal>I am at my best when an idea is still unclear—when someone needs to find the product, shape the story and make the room understand why it matters.</p>
-            <div><a href="mailto:saimkhanwah@gmail.com">START A CONVERSATION ↗</a><a href="https://vexilot.dev" target="_blank" rel="noreferrer">SEE THE PRODUCT ↗</a><a href="https://cal.com/muhammad-saim-0vertq" target="_blank" rel="noreferrer">BOOK 20 MINUTES ↗</a></div>
-          </div>
         </div>
       </section>
 
@@ -234,7 +226,7 @@ export default async function Home() {
           <span>THE FUTURE / STILL UNWRITTEN</span>
           <h2 data-reveal>I do not know exactly<br />what I will become.</h2>
           <p className="future-lead" data-reveal>Or where all of this is going.</p>
-          <p data-reveal>But I have a strange confidence that something good will happen—if I keep thinking, building, reaching out and leaving honest evidence behind.</p>
+          <p data-reveal>But I have a strange confidence that something good will happen if I keep thinking, building, reaching out and leaving honest evidence behind.</p>
           <Link href="/journey" className="future-journey" data-reveal><span>WATCH IT HAPPEN, DAY BY DAY</span><i>OPEN THE LIVING RECORD ↗</i></Link>
         </div>
       </section>
