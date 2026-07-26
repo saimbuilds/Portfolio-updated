@@ -78,11 +78,7 @@ export default async function Home() {
           </h1>
 
           <div className="hero-media" data-product-frame data-tilt>
-            <div className="media-placeholder">
-              <span>VEXILOT / PRODUCT FRAME</span>
-              <strong>YOUR SCREENSHOT<br />GOES HERE</strong>
-              <small>16:10 / IMAGE 01</small>
-            </div>
+            <div className="media-placeholder" style={{ padding: 0, backgroundImage: 'url(/visual1.png)', backgroundSize: 'cover', backgroundPosition: 'top center' }} />
             <p>THE PRODUCT THAT CHANGED<br />HOW I SEE MYSELF.</p>
           </div>
 
@@ -118,11 +114,7 @@ export default async function Home() {
 
             <article className="story-panel panel-product">
               <div className="panel-index"><span>02 / 04</span><span>THE PRODUCT</span></div>
-              <div className="product-window" data-tilt>
-                <span>VEXILOT / SCREEN 02</span>
-                <strong>DUMMY<br />PRODUCT<br />VISUAL</strong>
-                <small>REPLACE WITH REAL ASSET</small>
-              </div>
+              <div className="product-window" data-tilt style={{ padding: 0, backgroundImage: 'url(/visual2.png)', backgroundSize: 'cover', backgroundPosition: 'top center' }} />
               <h2>From theory<br />to systems.</h2>
             </article>
 
@@ -175,7 +167,7 @@ export default async function Home() {
         <div className="portrait-sticky">
           <div className="cinema-shell portrait-layout">
             <figure data-portrait>
-              <div className="portrait-disc"><span>PORTRAIT / PLACEHOLDER</span><strong>YOUR<br />PHOTO<br />HERE</strong><small>CIRCULAR FRAME / 04</small></div>
+              <div className="portrait-disc" style={{ padding: 0, backgroundImage: 'url(/pfp.jpg)', backgroundSize: 'cover', backgroundPosition: 'top' }} />
               <figcaption>MUHAMMAD SAIM / 19 / ISLAMABAD</figcaption>
             </figure>
             <div className="portrait-copy" data-portrait-copy>
@@ -222,7 +214,7 @@ export default async function Home() {
             )}
           </div>
 
-          <Link href="/studio" className="daily-cta"><span>ADD THE NEXT MOMENT</span><i>↗</i></Link>
+
         </div>
       </section>
 
@@ -232,7 +224,7 @@ export default async function Home() {
           <h2 data-reveal>Bring me a difficult<br />product <em>problem.</em></h2>
           <div className="collaboration-bottom">
             <p data-reveal>I am at my best when an idea is still unclear—when someone needs to find the product, shape the story and make the room understand why it matters.</p>
-            <div><a href="mailto:hello@saim.dev">START A CONVERSATION ↗</a><a href="https://vexilot.dev" target="_blank" rel="noreferrer">SEE THE PRODUCT ↗</a></div>
+            <div><a href="mailto:saimkhanwah@gmail.com">START A CONVERSATION ↗</a><a href="https://vexilot.dev" target="_blank" rel="noreferrer">SEE THE PRODUCT ↗</a><a href="https://cal.com/muhammad-saim-0vertq" target="_blank" rel="noreferrer">BOOK 20 MINUTES ↗</a></div>
           </div>
         </div>
       </section>
@@ -247,7 +239,16 @@ export default async function Home() {
         </div>
       </section>
 
-      <footer className="cinema-footer cinema-shell"><span>MUHAMMAD SAIM / ©2026</span><a href="mailto:hello@saim.dev">START A CONVERSATION ↗</a></footer>
+      <footer className="cinema-footer cinema-shell">
+        <span>MUHAMMAD SAIM / ©2026</span>
+        <nav className="footer-social">
+          <a href="https://github.com/saimbuilds" target="_blank" rel="noreferrer" aria-label="GitHub">GH ↗</a>
+          <a href="https://linkedin.com/in/saim_sys" target="_blank" rel="noreferrer" aria-label="LinkedIn">LI ↗</a>
+          <a href="https://instagram.com/saim_sys" target="_blank" rel="noreferrer" aria-label="Instagram">IG ↗</a>
+          <a href="https://cal.com/muhammad-saim-0vertq" target="_blank" rel="noreferrer" aria-label="Book a call">CAL ↗</a>
+        </nav>
+        <a href="mailto:saimkhanwah@gmail.com">START A CONVERSATION ↗</a>
+      </footer>
     </main>
   );
 }

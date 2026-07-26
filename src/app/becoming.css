@@ -277,6 +277,9 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .future-journey:hover i { transform: translateX(12px); }
 .cinema-footer { height: 90px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line-dark); font: 500 11px var(--mono); }
 .cinema-footer a { text-decoration: none; }
+.footer-social { display: flex; gap: 24px; align-items: center; }
+.footer-social a { font: 600 10px var(--mono); letter-spacing: .06em; text-decoration: none; opacity: .55; transition: opacity .2s ease; }
+.footer-social a:hover { opacity: 1; }
 
 .journey-page { --j-bone:#f0ede4; --j-graphite:#253137; --j-sky:#a7bdc1; --j-red:#a14335; min-height:100vh; background:var(--j-bone); color:var(--j-graphite); font-family:var(--sans); overflow-x:clip; }
 .journey-shell { width:min(calc(100% - 96px),1420px); margin-inline:auto; }
