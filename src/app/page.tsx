@@ -28,29 +28,12 @@ export default async function Home() {
         <div className="loader-portal-field" />
         <div className="cinema-loader-copy">
           <svg className="cinema-loader-monogram" viewBox="0 0 740 250" fill="none" role="presentation">
-            <defs>
-              <mask id="draw-s" maskUnits="userSpaceOnUse" x="0" y="0" width="740" height="250">
-                <path className="loader-draw-path" d="M171 51C145 25 71 28 52 65C27 113 151 104 157 158C163 209 70 228 35 190" />
-              </mask>
-              <mask id="draw-a-body" maskUnits="userSpaceOnUse" x="0" y="0" width="740" height="250">
-                <path className="loader-draw-path" d="M211 205C231 150 250 94 277 42C301 94 326 150 346 205" />
-              </mask>
-              <mask id="draw-a-bar" maskUnits="userSpaceOnUse" x="0" y="0" width="740" height="250">
-                <path className="loader-draw-path" d="M235 154C263 147 291 146 320 151" />
-              </mask>
-              <mask id="draw-i" maskUnits="userSpaceOnUse" x="0" y="0" width="740" height="250">
-                <path className="loader-draw-path" d="M411 43C410 96 409 153 413 207" />
-              </mask>
-              <mask id="draw-m" maskUnits="userSpaceOnUse" x="0" y="0" width="740" height="250">
-                <path className="loader-draw-path" d="M486 207C491 151 493 98 491 43C522 83 548 125 571 169C596 122 621 80 654 42C653 96 658 153 663 207" />
-              </mask>
-            </defs>
             <g className="loader-ink loader-ink-main">
-              <path mask="url(#draw-s)" d="M171 51C145 25 71 28 52 65C27 113 151 104 157 158C163 209 70 228 35 190" />
-              <path mask="url(#draw-a-body)" d="M211 205C231 150 250 94 277 42C301 94 326 150 346 205" />
-              <path mask="url(#draw-a-bar)" d="M235 154C263 147 291 146 320 151" />
-              <path mask="url(#draw-i)" d="M411 43C410 96 409 153 413 207" />
-              <path mask="url(#draw-m)" d="M486 207C491 151 493 98 491 43C522 83 548 125 571 169C596 122 621 80 654 42C653 96 658 153 663 207" />
+              <path className="loader-draw-path" d="M171 51C145 25 71 28 52 65C27 113 151 104 157 158C163 209 70 228 35 190" />
+              <path className="loader-draw-path" d="M211 205C231 150 250 94 277 42C301 94 326 150 346 205" />
+              <path className="loader-draw-path" d="M235 154C263 147 291 146 320 151" />
+              <path className="loader-draw-path" d="M411 43C410 96 409 153 413 207" />
+              <path className="loader-draw-path" d="M486 207C491 151 493 98 491 43C522 83 548 125 571 169C596 122 621 80 654 42C653 96 658 153 663 207" />
             </g>
             <circle className="loader-portal-dot" cx="696" cy="198" r="0" />
           </svg>

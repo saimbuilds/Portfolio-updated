@@ -30,7 +30,7 @@ html:has(.cinema-site) { scroll-behavior: auto; }
 .loader-ink { fill:none; stroke-linecap:butt; stroke-linejoin:round; }
 .loader-ink path { vector-effect:non-scaling-stroke; }
 .loader-ink-main { stroke:#b9f45b; stroke-width:18; }
-.loader-draw-path { fill:none; stroke:#fff; stroke-width:42; stroke-linecap:butt; stroke-linejoin:round; stroke-dasharray:1000; stroke-dashoffset:1000; opacity:0; }
+.loader-draw-path { fill:none; stroke:#b9f45b; stroke-width:18; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1000; stroke-dashoffset:1000; opacity:0; }
 .loader-portal-dot { fill:#b9f45b; }
 .loader-portal-field { position:fixed; z-index:2; left:0; top:0; width:18px; height:18px; border-radius:50%; background:#b9f45b; transform:scale(0); will-change:transform; pointer-events:none; }
 .cinema-loader.loader-skip { display: none !important; opacity: 0 !important; pointer-events: none !important; visibility: hidden !important; z-index: -1 !important; }
