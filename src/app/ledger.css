@@ -29,7 +29,7 @@
 .week-grid{grid-template-columns:repeat(var(--day-count,7),1fr)}
 @keyframes recordPulse{50%{box-shadow:0 0 0 8px rgba(161,67,53,0)}}
 @media(max-width:800px){
- .ledger-shell,.ledger-nav{width:min(calc(100% - 36px),1320px)}.ledger-nav{height:72px;grid-template-columns:1fr auto}.ledger-nav span,.ledger-nav nav a:first-child{display:none}.ledger-nav nav{display:block}
+ .ledger-shell,.ledger-nav{width:min(calc(100% - 36px),1320px)}.ledger-nav{height:72px;grid-template-columns:1fr auto}.ledger-nav span,.ledger-nav nav a:first-child{display:none}.ledger-nav nav{display:flex;gap:16px;align-items:center}
  .record-intro{display:block;padding:80px 0 95px}.record-intro h1{font-size:18vw;margin:55px 0 30px}.record-intro-copy>p{font-size:15px}.today-card{margin-top:75px;box-shadow:9px 10px 0 rgba(37,49,55,.09)}
  .record-numbers{grid-template-columns:1fr 1fr}.record-numbers>div{min-height:125px;padding:20px 0;border-bottom:1px solid var(--line)}.record-numbers strong{font-size:27px}.record-numbers small{font-size:10px}
  .week-view{padding:95px 0}.week-view>header{display:block}.week-view>header>p{margin-top:25px}.week-grid{height:280px;margin-top:45px}.week-grid>a{padding:7px}.week-bar i{width:55%}.week-grid>a>time{font-size:16px}

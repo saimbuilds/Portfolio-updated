@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { JourneyMotion } from "@/components/JourneyMotion";
 import { JourneyDashboard } from "@/components/JourneyDashboard";
+import { SoundControl } from "@/components/SoundControl";
 import { getEntries } from "@/lib/entries";
 import { getGoals } from "@/lib/goals";
 import { dayKey, formatMinutes, RECORD_START, totalMinutes } from "@/lib/format";
@@ -37,7 +38,7 @@ export default async function JourneyPage() {
     <header className="ledger-nav">
       <Link href="/">S.</Link>
       <span>LIVING WORK RECORD<br/><b>UPDATES FROM STUDIO</b></span>
-      <nav><a href="#history">HISTORY</a><Link href="/">PORTFOLIO ↗</Link></nav>
+      <nav><a href="#history">HISTORY</a><Link href="/">PORTFOLIO ↗</Link><SoundControl /></nav>
     </header>
 
     <section className="record-intro ledger-shell">
