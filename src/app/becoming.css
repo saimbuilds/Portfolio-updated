@@ -411,8 +411,8 @@ html:has(.cinema-site) { scroll-behavior: auto; }
   .cinema-footer a, .footer-social a { white-space: nowrap; }
   .portrait-story { height: 360svh; }
   .portrait-sticky { min-height:700px; }
-  .portrait-layout { height:100%; display: block; padding-top:13vh; }
-  .portrait-layout figure { width: 75vw; margin: 0 auto; transform: rotate(0deg); }
+  .portrait-layout { height:100%; display: block; padding-top:13vh; z-index: 3; }
+  .portrait-layout figure { width: 75vw; margin: 0 auto; transform: rotate(0deg); z-index: 3; }
   .portrait-layout figure > div { padding: 22px; box-shadow: 12px 14px 0 rgba(37,49,55,.13); }
   .portrait-layout figure span, .portrait-layout figure small, .portrait-layout figcaption { font-size: 10px; }
   .portrait-layout figure strong { font-size: clamp(24px, 7vw, 42px); }
@@ -420,13 +420,14 @@ html:has(.cinema-site) { scroll-behavior: auto; }
   .portrait-copy > span { font-size: 11px; }
   .portrait-copy h2 { margin: 30px 0 25px; font-size: clamp(32px, 11vw, 56px); line-height: 1.05; }
   .portrait-copy > p { margin-left: 0; font-size: 15px; }
+  .identity-orbit { z-index: 10; }
   .identity-orbit > header { top:22px; left:18px; right:18px; font-size:9px; }
   .orbit-rings { width:72vw; }
   .orbit-rings span { right:-4%; top:9%; font-size:8px; }
-  .orbit-beat { width:90vw; }
+  .orbit-beat { width:90vw; z-index: 12; }
   .orbit-beat > span { font-size:10px; }
-  .orbit-beat h3 { margin:24px 0 18px; font-size:clamp(28px, 9vw, 48px); line-height: 1.05; }
-  .orbit-beat p { max-width:100%; margin-left:0; font-size:15px; }
+  .orbit-beat h3 { margin:24px 0 18px; font-size:clamp(28px, 9vw, 48px); line-height: 1.05; text-shadow: 0 1px 4px rgba(240, 237, 228, 0.7); }
+  .orbit-beat p { max-width:100%; margin-left:0; font-size:15px; text-shadow: 0 1px 4px rgba(240, 237, 228, 0.7); }
   .orbit-beat-one { left:18px; top:20vh; }
   .orbit-beat-two { right:18px; top:20vh; }
   .orbit-beat-two p { margin-right:0; }
